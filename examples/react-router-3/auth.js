@@ -11,9 +11,15 @@ export const userIsAuthenticated = connectedRouterRedirect({
   wrapperDisplayName: 'UserIsAuthenticated'
 })
 
+export const userIsAdmin = connectedRouterRedirect({
+  redirectPath: '/',
+  allowRedirectBack: false,
+  authenticatedSelector: state => state.user.data !== null && state.user.data.isAdmin,
+  wrapperDisplayName: 'UserIsAdmin'
+})
 
 export const userIsNotAuthenticated = connectedRouterRedirect({
-  redirectPath: (state, ownProps) => locationHelper.getRedirectQueryParam(ownProps) || '/tony',
+  redirectPath: (state, ownProps) => locationHelper.getRedirectQueryParam(ownProps) || '/foo',
   allowRedirectBack: false,
   // Want to redirect the user when they are done loading and authenticated
   authenticatedSelector: state => state.user.data === null,
